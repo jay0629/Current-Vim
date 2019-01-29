@@ -33,6 +33,7 @@ set cursorcolumn
 let g:tagbar_width=35
 let g:tagbar_autofocus=1
 nmap <F2> :NERDTreeToggle<CR>
+
 " set Command-T
 nmap <F3> :CommandT<CR>
 nmap <F4> :TagbarToggle<CR>
@@ -52,7 +53,7 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
-
+" plugin 'edkolev/promptline'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
@@ -81,11 +82,8 @@ Plugin 'wincent/command-t'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-surround'
 Plugin 'scrooloose/syntastic'
-" puppet highlight
 Plugin 'rodjek/vim-puppet'
-" Ruby highlight
 Plugin 'vim-ruby/vim-ruby'
-
 Plugin 'tomasr/molokai'
 Plugin 'godlygeek/tabular'
 Plugin 'hdima/python-syntax'
@@ -94,6 +92,7 @@ Plugin 'Shougo/neocomplete.vim'
 Plugin 'Raimondi/delimitMate'
 Plugin 'mileszs/ack.vim'
 Plugin 'gcmt/wildfire.vim'
+Plugin 'promptline.vim'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 " disable following as copy-paste error in Putty
@@ -112,7 +111,8 @@ filetype plugin on
 " Set colorscheme
 set t_Co=256
 set background=dark
-colorscheme molokai
+colorscheme solarized
+" colorscheme molokai
 " jump to last edit position
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 " Get ride of Ex mode
@@ -131,6 +131,7 @@ let g:airline_theme='dark'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#promptline#enabled = 1
 nmap <leader>1 <Plug>AirlineSelectTab1
 nmap <leader>2 <Plug>AirlineSelectTab2
 nmap <leader>3 <Plug>AirlineSelectTab3
@@ -143,6 +144,7 @@ nmap <leader>9 <Plug>AirlineSelectTab9
 nmap <leader>- <Plug>AirlineSelectPrevTab
 nmap <leader>+ <Plug>AirlineSelectNextTab
 
+inoremap <Tab> <esc>:w<Enter>
 " close NERDTree automatically
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " let g:NERDTreeDirArrowExpandable = ''
@@ -153,7 +155,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 set tags=tags;/
 
 " for python syntax check
-filetype plugin on  
+filetype plugin on
 set omnifunc=syntaxcomplete#Complete
 
 set statusline+=%#warningmsg#
@@ -171,6 +173,7 @@ hi MatchParen cterm=underline ctermfg=magenta ctermbg=none
 " Set git commit message format
 autocmd Filetype gitcommit setlocal spell textwidth=72
 
+set nospell
 " Tweak the performance of tagbar( only search tagbar for following file type)
 autocmd FileType go,python,perl,java,c,cpp,bash,java,ruby let g:airline#extensions#tabline#enabled = 1
 
